@@ -20,6 +20,34 @@ class ProyectosController extends Controller
         return view('proyecto.index',['proyectos'=> $proyectos]);
     }
 
+    public function edit($id)
+    {
+        $proyecto= Proyectos::find($id);
+        return view('proyecto.update',compact ('proyecto'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request -> validate ([
+            'nombre' => 'required|max:255',
+            'lider' => 'required',
+        ]);
+        $proyectos = Proyectos::find($id);
+        $proyectos -> update($request -> all());
+        return redirect()-> route('proyecto.index')
+        -> with('success', 'Post updated successfully.');
+    }
+
+    public function destroy ($id)
+    {
+        $proyectos = Proyecto::find($id);
+        $proyectos -> delete();
+        return redirect() -> route ('proyecto.update')
+        -> with('success', 'product deleted successfully');
+    }
+
+    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -58,10 +86,7 @@ class ProyectosController extends Controller
      * @param  \App\Models\Proyectos  $proyectos
      * @return \Illuminate\Http\Response
      */
-    public function edit(Proyectos $proyectos)
-    {
-        //
-    }
+    
 
     /**
      * Update the specified resource in storage.
@@ -70,19 +95,12 @@ class ProyectosController extends Controller
      * @param  \App\Models\Proyectos  $proyectos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Proyectos $proyectos)
-    {
-        //
-    }
-
+    
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Proyectos  $proyectos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Proyectos $proyectos)
-    {
-        //
-    }
+    
 }
