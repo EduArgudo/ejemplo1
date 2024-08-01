@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProyectosController;
+use App\Http\Controllers\MateriaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,5 @@ Route::get('/', function () {
 });
 
 Route::resource('proyecto',ProyectosController::class);
+
+Route::resource('Materia',MateriaController::class);
